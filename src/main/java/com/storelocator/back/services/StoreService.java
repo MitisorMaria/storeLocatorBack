@@ -16,4 +16,12 @@ public class StoreService {
     public ArrayList<Store> getAllStores() {
         return (ArrayList<Store>)storeRepository.findAll();
     }
+
+    public void deleteStore (long storeId) {
+        storeRepository.deleteById(storeId);
+    }
+
+    public void addStore (Store store) {
+        storeRepository.save(store);
+    }
 }

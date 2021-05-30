@@ -1,5 +1,6 @@
 package com.storelocator.back.bl;
 
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -11,28 +12,23 @@ public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column(name="locationId")
-    private long locationId;
     @Column(name="name")
     private String name;
     @Column(name="address")
     private String address;
+    @Column(name="latitude")
+    private float latitude;
+    @Column(name="longitude")
+    private float longitude;
 
-    public Store(long location, String name, String address) {
-        this.locationId = location;
+    public Store(String name, String address, float latitude, float longitude) {
         this.name = name;
         this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public Store() {
-    }
-
-    public long getLocation() {
-        return locationId;
-    }
-
-    public void setLocation(long location) {
-        this.locationId = location;
     }
 
     public String getName() {
@@ -49,5 +45,21 @@ public class Store {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
+    }
+
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
     }
 }
