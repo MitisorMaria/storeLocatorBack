@@ -33,10 +33,10 @@ public class StoreController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(value = "stores")
-    public ResponseEntity<?> updateStoreById(@RequestBody Store store) {
+    @PutMapping(value = "stores/{id}")
+    public ResponseEntity<?> updateStoreById(@PathVariable("id") long storeId, @RequestBody Store store) {
         storeService.updateStore(store.getName(), store.getAddress(), store.getLatitude(), store.getLongitude(),
-                store.getId());
+                storeId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
