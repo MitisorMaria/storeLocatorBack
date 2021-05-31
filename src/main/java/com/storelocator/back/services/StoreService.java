@@ -24,4 +24,8 @@ public class StoreService {
     public void addStore (Store store) {
         storeRepository.save(store);
     }
+
+    public void updateStore (String name, String address, Float latitude, Float longitude, Long id) {
+        storeRepository.updateStoreById(name, address, latitude, longitude, id);
+    }
 }

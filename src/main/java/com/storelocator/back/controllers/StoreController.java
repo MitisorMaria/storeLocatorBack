@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
-@RestController
-@RequestMapping(value="/")
 @CrossOrigin(origins = "http://localhost:4200")
+@RestController
+@RequestMapping(path="/")
 public class StoreController {
 
     @Autowired
@@ -22,14 +22,21 @@ public class StoreController {
         return storeService.getAllStores();
     }
 
-    @DeleteMapping(value="stores")
-    public void deleteStore(@RequestParam long storeId) {
+    @DeleteMapping(value="stores/{id}")
+    public void deleteStore(@PathVariable("id") long storeId) {
         storeService.deleteStore(storeId);
     }
 
     @PostMapping(value = "stores")
     public ResponseEntity<?> addStore(@RequestBody Store store) {
         storeService.addStore(store);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping(value = "stores")
+    public ResponseEntity<?> updateStoreById(@RequestBody Store store) {
+        storeService.updateStore(store.getName(), store.getAddress(), store.getLatitude(), store.getLongitude(),
+                store.getId());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

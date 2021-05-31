@@ -62,4 +62,8 @@ public class Store {
     public void setLongitude(float longitude) {
         this.longitude = longitude;
     }
+
+    public long getId() {
+        return id;
+    }
 }
