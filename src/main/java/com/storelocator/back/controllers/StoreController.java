@@ -22,6 +22,11 @@ public class StoreController {
         return storeService.getAllStores();
     }
 
+    @GetMapping(value="stores/{id}")
+    public Store getStoreById(@PathVariable("id") long storeId) {
+        return storeService.getStoreById(storeId);
+    }
+
     @DeleteMapping(value="stores/{id}")
     public void deleteStore(@PathVariable("id") long storeId) {
         storeService.deleteStore(storeId);
@@ -35,7 +40,12 @@ public class StoreController {
 
     @PutMapping(value = "stores/{id}")
     public ResponseEntity<?> updateStoreById(@PathVariable("id") long storeId, @RequestBody Store store) {
-        storeService.updateStore(store.getName(), store.getAddress(), store.getLatitude(), store.getLongitude(),
+        Store oldStore = storeService.getStoreById(storeId);
+        String newName = store.getName().equals("") ? oldStore.getName() : store.getName();
+        String newAddress = store.getAddress().equals("") ? oldStore.getAddress() : store.getAddress();
+        float newLatitude = store.getLatitude() == 0 ? oldStore.getLatitude() : store.getLatitude();
+        float newLongitude = store.getLongitude() == 0 ? oldStore.getLongitude() : store.getLongitude();
+        storeService.updateStore(newName, newAddress, newLatitude, newLongitude,
                 storeId);
         return new ResponseEntity<>(HttpStatus.OK);
     }

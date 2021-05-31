@@ -28,4 +28,8 @@ public class StoreService {
     public void updateStore (String name, String address, Float latitude, Float longitude, Long id) {
         storeRepository.updateStoreById(name, address, latitude, longitude, id);
     }
+
+    public Store getStoreById (long id) {
+        return storeRepository.findById(id).get();
+    }
 }
